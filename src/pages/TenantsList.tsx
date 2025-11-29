@@ -1,4 +1,4 @@
-import { Users, Phone, Home, Search } from 'lucide-react';
+import { Phone, Home, Search } from 'lucide-react';
 import type { Property } from '../types';
 import { useState } from 'react';
 

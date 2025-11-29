@@ -1,6 +1,6 @@
 import { Modal } from '../ui/Modal';
 import type { Property } from '../../types';
-import { Phone, Home, Calendar, AlertTriangle } from 'lucide-react';
+import { Phone, Home } from 'lucide-react';
 
 interface TenantDetailModalProps {
     isOpen: boolean;

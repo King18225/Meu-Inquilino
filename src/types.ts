@@ -5,13 +5,7 @@ export interface Tenant {
     name: string;
     phone: string; // Formato para WhatsApp
 }
-export type PaymentStatus = 'paid' | 'late' | 'due_today' | 'pending';
 
-export interface Tenant {
-    id: string;
-    name: string;
-    phone: string; // Formato para WhatsApp
-}
 
 export interface Property {
     id: string;

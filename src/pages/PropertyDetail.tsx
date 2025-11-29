@@ -95,13 +95,12 @@ export function PropertyDetail({ property, onBack, onMarkAsPaid, onEdit }: Prope
         }
     };
 
-    const handleSendReceipt = () => {
-        const today = new Date();
-        const monthName = today.toLocaleDateString('pt-BR', { month: 'long' });
+    const handleSendReceipt = (amount: number = property.rentAmount, date: Date = new Date()) => {
+        const monthName = date.toLocaleDateString('pt-BR', { month: 'long' });
         const message = encodeURIComponent(
             `Olá *${property.tenant.name}*! ✅\n` +
             `Confirmo o recebimento do aluguel da *${property.address}*.\n` +
-            `Valor: *${formatCurrency(property.rentAmount)}*\n` +
+            `Valor: *${formatCurrency(amount)}*\n` +
             `Referente a: *${monthName}*\n\n` +
             `Muito obrigado!`
         );
@@ -148,7 +147,7 @@ export function PropertyDetail({ property, onBack, onMarkAsPaid, onEdit }: Prope
                 </p>
 
                 <button
-                    onClick={handleSendReceipt}
+                    onClick={() => handleSendReceipt()}
                     className="w-full max-w-sm py-4 bg-green-500 hover:bg-green-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 shadow-lg mb-4 transition-all active:scale-95"
                 >
                     <Share2 size={24} />
@@ -289,9 +288,18 @@ export function PropertyDetail({ property, onBack, onMarkAsPaid, onEdit }: Prope
                                         Pago em {new Date(record.paid_at).toLocaleDateString('pt-BR')}
                                     </p>
                                 </div>
-                                <span className="px-3 py-1 bg-success-light text-success-dark text-xs font-bold rounded-full">
-                                    PAGO
-                                </span>
+                                <div className="flex items-center gap-2">
+                                    <span className="px-3 py-1 bg-success-light text-success-dark text-xs font-bold rounded-full">
+                                        PAGO
+                                    </span>
+                                    <button
+                                        onClick={() => handleSendReceipt(property.rentAmount, new Date(record.due_date))}
+                                        className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-full transition-colors"
+                                        title="Enviar Recibo"
+                                    >
+                                        <Share2 size={20} />
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>

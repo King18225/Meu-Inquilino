@@ -1,6 +1,7 @@
 import { Modal } from '../ui/Modal';
 import type { Property } from '../../types';
 import { Phone, Home } from 'lucide-react';
+import { formatCurrency } from '../../lib/format';
 
 interface TenantDetailModalProps {
     isOpen: boolean;
@@ -68,7 +69,12 @@ export function TenantDetailModal({ isOpen, onClose, tenantName, properties }: T
 
                             return (
                                 <div key={property.id} className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                                    <p className="font-bold text-gray-900">{property.address}</p>
+                                    <div className="flex justify-between items-start mb-2">
+                                        <p className="font-bold text-gray-900 flex-1 pr-2">{property.address}</p>
+                                        <span className="font-bold text-green-600 shrink-0">
+                                            {formatCurrency(property.rentAmount)}
+                                        </span>
+                                    </div>
                                     <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
                                         <div>
                                             <span className="block text-gray-500 text-xs uppercase">Início</span>

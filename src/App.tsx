@@ -5,6 +5,7 @@ import { TopNav } from './components/layout/TopNav';
 import { Dashboard } from './pages/Dashboard';
 import { PropertyDetail } from './pages/PropertyDetail';
 import { TenantsList } from './pages/TenantsList'; // Import TenantsList
+import { ContractTimeline } from './pages/ContractTimeline'; // Import ContractTimeline
 import { TenantDetailModal } from './components/modals/TenantDetailModal'; // Import TenantDetailModal
 import { Button } from './components/ui/Button';
 
@@ -15,7 +16,7 @@ import { Home } from 'lucide-react';
 import { checkAndSendAlerts } from './lib/notifications';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'home' | 'tenants' | 'new'>('home'); // Update type
+  const [activeTab, setActiveTab] = useState<'home' | 'tenants' | 'new' | 'timeline'>('home'); // Update type
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [properties, setProperties] = useState<Property[]>([]);
   const [isNewPropertyModalOpen, setIsNewPropertyModalOpen] = useState(false);
@@ -105,7 +106,7 @@ function App() {
     fetchProperties();
   }, []);
 
-  const handleTabChange = (tab: 'home' | 'tenants' | 'new') => {
+  const handleTabChange = (tab: 'home' | 'tenants' | 'new' | 'timeline') => {
     if (tab === 'new') {
       setPropertyToEdit(null);
       setIsNewPropertyModalOpen(true);
@@ -184,6 +185,15 @@ function App() {
         <TenantsList
           properties={properties}
           onSelectTenant={setSelectedTenantName}
+        />
+      );
+    }
+
+    if (activeTab === 'timeline') {
+      return (
+        <ContractTimeline
+          properties={properties}
+          onSelectProperty={setSelectedProperty}
         />
       );
     }

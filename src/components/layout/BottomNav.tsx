@@ -1,9 +1,9 @@
-import { Home, PlusCircle, Users } from 'lucide-react';
+import { Home, PlusCircle, Users, CalendarClock } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface BottomNavProps {
-    activeTab: 'home' | 'tenants' | 'new';
-    onTabChange: (tab: 'home' | 'tenants' | 'new') => void;
+    activeTab: 'home' | 'tenants' | 'new' | 'timeline';
+    onTabChange: (tab: 'home' | 'tenants' | 'new' | 'timeline') => void;
 }
 
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
@@ -42,7 +42,18 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
                     <PlusCircle size={32} strokeWidth={activeTab === 'new' ? 2.5 : 2} />
                     <span className="text-sm font-medium">Novo</span>
                 </button>
+
+                <button
+                    onClick={() => onTabChange('timeline')}
+                    className={cn(
+                        "flex flex-col items-center justify-center w-full h-full space-y-1",
+                        activeTab === 'timeline' ? "text-blue-600" : "text-gray-500"
+                    )}
+                >
+                    <CalendarClock size={32} strokeWidth={activeTab === 'timeline' ? 2.5 : 2} />
+                    <span className="text-sm font-medium">Agenda</span>
+                </button>
             </div>
-        </nav>
+        </nav >
     );
 }

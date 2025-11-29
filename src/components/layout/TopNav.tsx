@@ -1,9 +1,9 @@
-import { Home, PlusCircle, Users } from 'lucide-react';
+import { Home, PlusCircle, Users, CalendarClock } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 interface TopNavProps {
-    activeTab: 'home' | 'tenants' | 'new';
-    onTabChange: (tab: 'home' | 'tenants' | 'new') => void;
+    activeTab: 'home' | 'tenants' | 'new' | 'timeline';
+    onTabChange: (tab: 'home' | 'tenants' | 'new' | 'timeline') => void;
 }
 
 export function TopNav({ activeTab, onTabChange }: TopNavProps) {
@@ -40,7 +40,16 @@ export function TopNav({ activeTab, onTabChange }: TopNavProps) {
                     <PlusCircle size={20} />
                     Novo Imóvel
                 </Button>
+
+                <Button
+                    variant={activeTab === 'timeline' ? 'primary' : 'secondary'}
+                    onClick={() => onTabChange('timeline')}
+                    className="flex items-center gap-2 h-10 text-base"
+                >
+                    <CalendarClock size={20} />
+                    Vencimentos
+                </Button>
             </div>
-        </nav>
+        </nav >
     );
 }

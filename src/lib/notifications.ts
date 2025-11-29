@@ -15,9 +15,9 @@ export function sendNotification(title: string, body: string) {
         try {
             new Notification(title, {
                 body,
-                icon: '/pwa-192x192.png', // Ensure this path is correct
+                icon: '/pwa-192x192.png',
                 vibrate: [200, 100, 200],
-            });
+            } as any);
         } catch (e) {
             console.error('Error sending notification:', e);
         }
@@ -36,8 +36,6 @@ export function checkAndSendAlerts(properties: Property[]) {
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
             if (diffDays >= 5) {
-                // Avoid spamming: In a real app, we would check if we already sent this today.
-                // For MVP, we'll just send it.
                 sendNotification(
                     "Aluguel Atrasado!",
                     `O aluguel de ${property.tenant.name} está atrasado há ${diffDays} dias.`

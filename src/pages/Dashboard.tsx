@@ -3,6 +3,7 @@ import { PropertyCard } from '../components/PropertyCard';
 import { formatCurrency } from '../lib/format';
 import { TrendingUp, TrendingDown, Search } from 'lucide-react';
 import { useState } from 'react';
+import { NotificationButton } from '../components/ui/NotificationButton';
 
 interface DashboardProps {
     properties: Property[];
@@ -23,7 +24,10 @@ export function Dashboard({ properties, onSelectProperty, financialSummary }: Da
 
     return (
         <div className="pb-24 pt-6 px-4">
-            <h1 className="text-2xl font-bold text-gray-900 mb-6">Meus Imóveis</h1>
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold text-gray-900">Meus Imóveis</h1>
+                <NotificationButton />
+            </div>
 
             {/* Financial Summary Card */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">

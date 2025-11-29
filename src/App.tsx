@@ -12,6 +12,7 @@ import { Modal } from './components/ui/Modal';
 import { NewPropertyForm } from './components/forms/NewPropertyForm';
 import { supabase } from './lib/supabase';
 import { Home } from 'lucide-react';
+import { checkAndSendAlerts } from './lib/notifications';
 
 function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'tenants' | 'new'>('home'); // Update type
@@ -91,6 +92,7 @@ function App() {
         mappedProperties.sort((a, b) => statusPriority[a.status] - statusPriority[b.status]);
 
         setProperties(mappedProperties);
+        checkAndSendAlerts(mappedProperties);
       }
     } catch (err) {
       console.error('Error fetching properties:', err);
